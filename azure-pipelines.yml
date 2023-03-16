@@ -23,8 +23,38 @@ steps:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
     KeyFilter: 'Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
+    TrimKeyPrefix: |
+      Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:
+      test:
+
+- task: AzureAppConfiguration@6
+  inputs:
+    azureSubscription: 'devopsTest'
+    AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
+    KeyFilter: 'Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
+    TrimKeyPrefix: |
+      Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:
+      test:
+
+- task: AzureAppConfiguration@6
+  inputs:
+    azureSubscription: 'devopsTest'
+    AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
+    KeyFilter: 'Default:Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
+    Label: 'DEV'    
+    TrimKeyPrefix: |
+      Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:
+      test:
+
+- task: AzureAppConfiguration@6
+  inputs:
+    azureSubscription: 'devopsTest'
+    AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
+    KeyFilter: 'Default:Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
     Label: 'DEV'
-    TrimKeyPrefix: 
+    TrimKeyPrefix: |
+      Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:
+      test:
 
 - bash: env
 
