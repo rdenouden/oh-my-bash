@@ -18,43 +18,44 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-- task: AzureAppConfiguration@6
-  inputs:
-    azureSubscription: 'devopsTest'
-    AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
-    KeyFilter: 'Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
-    TrimKeyPrefix: |
+variables:
+  - name: trimkeys_old
+    value: |
       Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:
       test:
+    readonly: True
+  - name: environment
+    value: 'DEV'
 
 - task: AzureAppConfiguration@6
   inputs:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
     KeyFilter: 'Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
-    TrimKeyPrefix: |
-      Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:
-      test:
+    TrimKeyPrefix: ${trimkeys}
+
+- task: AzureAppConfiguration@6
+  inputs:
+    azureSubscription: 'devopsTest'
+    AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
+    KeyFilter: 'Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
+    Label: ${environment}
+    TrimKeyPrefix: ${trimkeys}
 
 - task: AzureAppConfiguration@6
   inputs:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
     KeyFilter: 'Default:Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
-    Label: 'DEV'    
-    TrimKeyPrefix: |
-      Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:
-      test:
+    TrimKeyPrefix: ${trimkeys}
 
 - task: AzureAppConfiguration@6
   inputs:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
     KeyFilter: 'Default:Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
-    Label: 'DEV'
-    TrimKeyPrefix: |
-      Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:
-      test:
+    Label: ${environment}
+    TrimKeyPrefix: ${trimkeys}
 
 - bash: env
 
