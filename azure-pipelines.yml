@@ -12,8 +12,7 @@ pool:
 variables:
   - name: trimkeys_old
     value: |
-      Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:
-      test:
+      Default:
   - name: environment
     value: 'DEV'
   - name: filter
