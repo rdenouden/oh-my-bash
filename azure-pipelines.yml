@@ -22,7 +22,7 @@ steps:
   inputs:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
-    KeyFilter: '*'
+    KeyFilter: 'Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
     Label: 'DEV'
     TrimKeyPrefix: 
 
