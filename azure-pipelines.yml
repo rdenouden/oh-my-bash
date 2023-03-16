@@ -9,6 +9,16 @@ trigger:
 pool:
   name: Default
 
+variables:
+  - name: trimkeys_old
+    value: |
+      Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:
+      test:
+  - name: environment
+    value: 'DEV'
+  - name: filter
+    value: 'Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
+
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
@@ -18,42 +28,34 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-variables:
-  - name: trimkeys_old
-    value: |
-      Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:
-      test:
-    readonly: True
-  - name: environment
-    value: 'DEV'
 
 - task: AzureAppConfiguration@6
   inputs:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
-    KeyFilter: 'Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
+    KeyFilter: "Default:$(filter)"
     TrimKeyPrefix: $(trimkeys)
 
 - task: AzureAppConfiguration@6
   inputs:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
-    KeyFilter: 'Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
     Label: $(environment)
+    KeyFilter: "Default:$(filter)"
     TrimKeyPrefix: $(trimkeys)
 
 - task: AzureAppConfiguration@6
   inputs:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
-    KeyFilter: 'Default:Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
+    KeyFilter: $(filter)
     TrimKeyPrefix: $(trimkeys)
 
 - task: AzureAppConfiguration@6
   inputs:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
-    KeyFilter: 'Default:Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
+    KeyFilter: $(filter)
     Label: $(environment)
     TrimKeyPrefix: $(trimkeys)
 
