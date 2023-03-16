@@ -26,3 +26,5 @@ steps:
     Label: 'DEV'
     TrimKeyPrefix: 
 
+- bash: env
+
