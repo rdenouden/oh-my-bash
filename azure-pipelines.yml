@@ -32,30 +32,30 @@ variables:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
     KeyFilter: 'Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
-    TrimKeyPrefix: ${trimkeys}
+    TrimKeyPrefix: $(trimkeys)
 
 - task: AzureAppConfiguration@6
   inputs:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
     KeyFilter: 'Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
-    Label: ${environment}
-    TrimKeyPrefix: ${trimkeys}
+    Label: $(environment)
+    TrimKeyPrefix: $(trimkeys)
 
 - task: AzureAppConfiguration@6
   inputs:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
     KeyFilter: 'Default:Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
-    TrimKeyPrefix: ${trimkeys}
+    TrimKeyPrefix: $(trimkeys)
 
 - task: AzureAppConfiguration@6
   inputs:
     azureSubscription: 'devopsTest'
     AppConfigurationEndpoint: 'https://appconfigrdno.azconfig.io'
     KeyFilter: 'Default:Cams:HttpGatekeeper:HttpGatekeeper:Modules:0:*'
-    Label: ${environment}
-    TrimKeyPrefix: ${trimkeys}
+    Label: $(environment)
+    TrimKeyPrefix: $(trimkeys)
 
 - bash: env
 
